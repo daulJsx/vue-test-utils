@@ -7,7 +7,13 @@ const App = {
     }
   },
   template: `
-    <div>Count: {{ count }}</div>
+    <div v-if="count % 2 === 0">
+        Count: {{ count }}. Count is even.
+    </div>
+
+    <div v-if="count % 2 !== 0">
+        Count: {{ count }}. Count is odd.
+    </div>
   `,
 };
 
@@ -19,5 +25,5 @@ test("App", () => {
   });
   console.log(wrapper.html());
 
-  expect(wrapper.html()).toContain("Count: 1");
+  expect(wrapper.html()).toContain("Count: 1. Count is odd.");
 });
