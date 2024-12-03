@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, inject } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "App",
   setup() {
-    const store = useStore();
+    const store = inject("store");
     const count = computed(() => store.state.count);
 
     const increment = () => {
