@@ -1,15 +1,16 @@
 import { mount } from "@vue/test-utils";
-import { nextTick } from "vue";
+import { nextTick, ref } from "vue";
 
 const App = {
-  data() {
-    return {
-      count: 0
+  setup() {
+    const count = ref(0)
+    const increment = () => {
+        count.value += 1
     }
-  },
-  methods:{
-    increment() {
-        this.count += 1
+
+    return {
+        count,
+        increment
     }
   },
   template: `
@@ -33,12 +34,10 @@ function factory({ data } = { data: {} }) {
 }
 
 describe("App", () => {
-    it('render count when even', () => {
-        const wrapper = factory({ 
-            data: { 
-              count: 2
-            }
-         })
+    it('render count when even', async() => {
+        const wrapper = factory()
+        await wrapper.find('button').trigger('click')
+        await wrapper.find('button').trigger('click')
         expect(wrapper.html()).toContain("Count: 2. Count is even.");
     })
 
