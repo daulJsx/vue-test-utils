@@ -6,6 +6,7 @@
 import axios from "axios";
 
 export default {
+  name: "Fetcher",
   mounted() {
     axios.get("");
   },
